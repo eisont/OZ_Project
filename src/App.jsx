@@ -21,7 +21,7 @@ const App = () => {
   const [famousSaying, setFamousSaying] = useState({ author: '', message: '' });
   const [todoList, setTodoList] = useState([]);
   const [time, setTime] = useState('');
-  const [, setIntervalid] = useState(null);
+  const [intervalid, setIntervalid] = useState(null);
 
   // 데이터 받아오기
   useEffect(() => {
@@ -58,8 +58,22 @@ const App = () => {
     return () => clearInterval(id);
   }, []);
 
+  const startBt = () => {
+    if (!intervalid) {
+      const id = setInterval(() => currentTime(), 1000);
+      setIntervalid(id);
+    }
+  };
+  const stopBt = () => {
+    if (intervalid) {
+      clearInterval(intervalid);
+      setIntervalid(null);
+    }
+  };
   return (
     <div className='wrapper'>
+      <button onClick={stopBt}>time stop</button>
+      <button onClick={startBt}>time start</button>
       <h1>{time}</h1>
       <h3>
         {famousSaying.message} <div style={{ fontSize: '16px' }}>- {famousSaying.author}</div>
