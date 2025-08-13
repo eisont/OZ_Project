@@ -34,6 +34,7 @@ const App = () => {
   const [famousSaying, setFamousSaying] = useState({ author: '', message: '' });
   const [todoList, setTodoList] = useState([]);
   const [time, setTime] = useState('');
+  const [intervalid, setIntervalid] = useState(null);
 
   useEffect(() => {
     fetch('https://korean-advice-open-api.vercel.app/api/advice')
@@ -51,7 +52,13 @@ const App = () => {
     const second = today.getSeconds();
     return setTime(`${year} ${month}/${day} ${hour}:${minuite}:${second}`);
   };
-  setInterval(currentTime, 60000);
+
+  useEffect(() => {
+    const id = setInterval(() => currentTime(), 1000);
+    setIntervalid(id);
+
+    return clearInterval(intervalid);
+  }, [intervalid]);
 
   return (
     <div className='wrapper'>
