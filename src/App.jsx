@@ -18,24 +18,19 @@ import { useEffect, useState } from 'react';
 // Custom Hook을 만들고 사용해 보세요.
 
 const App = () => {
-  const test = () => {
-    fetch('http://localhost:3000/todo', {
-      method: 'POST',
-      body: JSON.stringify({
-        id: '1',
-        content: 'ddkdk',
-        edit: false,
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => console.log('res', res));
-  };
-
   const [famousSaying, setFamousSaying] = useState({ author: '', message: '' });
   const [todoList, setTodoList] = useState([]);
   const [time, setTime] = useState('');
-  const [intervalid, setIntervalid] = useState(null);
+  const [, setIntervalid] = useState(null);
 
+  // 데이터 받아오기
+  useEffect(() => {
+    fetch('http://localhost:3000/todo')
+      .then((res) => res.json())
+      .then((res) => setTodoList(res));
+  }, [todoList]);
+
+  // 랜덤 명언 받아오기!
   useEffect(() => {
     fetch('https://korean-advice-open-api.vercel.app/api/advice')
       .then((res) => res.json())
@@ -54,15 +49,17 @@ const App = () => {
   };
 
   useEffect(() => {
-    const id = setInterval(() => currentTime(), 1000);
+    const id = setInterval(() => {
+      currentTime();
+    }, 1000);
+
     setIntervalid(id);
 
-    return clearInterval(intervalid);
-  }, [intervalid]);
+    return () => clearInterval(id);
+  }, []);
 
   return (
     <div className='wrapper'>
-      <button onClick={test}>ddd</button>
       <h1>{time}</h1>
       <h3>
         {famousSaying.message} <div style={{ fontSize: '16px' }}>- {famousSaying.author}</div>
