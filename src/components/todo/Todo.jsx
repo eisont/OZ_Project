@@ -4,7 +4,6 @@ import * as S from './Todo.styled';
 
 const Todo = (pr) => {
   const ref = useRef(null);
-  console.log(ref.current);
 
   const DoneValue = () => {
     pr.setTodoList((prev) => prev.map((el) => (el.id === pr.todo.id && ref.current.value ? { ...el, content: ref.current.value, edit: !el.edit } : el)));
