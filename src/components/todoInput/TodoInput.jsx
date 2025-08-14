@@ -5,17 +5,22 @@ const TodoInput = () => {
   const [inputValue, setInputValue] = useState('');
 
   // 데이터 등록하기
-  const addData = (content) => {
-    fetch('http://localhost:3000/todo', {
-      method: 'POST',
-      body: JSON.stringify({
-        id: Number(new Date()),
-        content: content,
-        edit: false,
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => console.log('등록 완료', res));
+  const addData = async (content) => {
+    try {
+      const res = await fetch('http://localhost:3000/todo', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: Number(new Date()),
+          content,
+          edit: false,
+        }),
+      });
+      const json = await res.json();
+      console.log('등록 완료', json);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const checkValue = () => {
