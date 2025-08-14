@@ -5,10 +5,21 @@ import * as S from './Todo.styled';
 const Todo = (pr) => {
   const ref = useRef(null);
 
-  const DoneValue = () => {
-    pr.setTodoList((prev) => prev.map((el) => (el.id === pr.todo.id && ref.current.value ? { ...el, content: ref.current.value, edit: !el.edit } : el)));
-  };
-  const EditValue = () => {
+  const EditValue = async (id, content, edit) => {
+    try {
+      const res = await fetch(`http://localhost:3000/todo/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ content, edit }),
+      });
+      const data = await res.json();
+      console.log('수정완료', data);
+    } catch (err) {
+      console.error(err);
+    }
+
     return pr.setTodoList((prev) => prev.map((el) => (el.id === pr.todo.id ? { ...el, edit: !el.edit } : el)));
   };
 
@@ -20,11 +31,11 @@ const Todo = (pr) => {
         {pr.todo.edit ? <EditTodo ref={ref} /> : <S.Content>{pr.todo.content}</S.Content>}
         <S.BtBox>
           {pr.todo.edit ? (
-            <S.EditBt className='Bt' onClick={DoneValue}>
+            <S.EditBt className='Bt' onClick={() => EditValue(pr.todo.id, ref.current.value, !pr.todo.edit)}>
               Done
             </S.EditBt>
           ) : (
-            <S.EditBt className='Bt' onClick={EditValue}>
+            <S.EditBt className='Bt' onClick={() => EditValue(pr.todo.id, pr.todo.content, !pr.todo.edit)}>
               Edit
             </S.EditBt>
           )}
