@@ -11,7 +11,7 @@ const TodoInput = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          id: Number(new Date()),
+          id: Number(new Date()).toString(),
           content,
           edit: false,
         }),

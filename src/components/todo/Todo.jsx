@@ -5,6 +5,17 @@ import * as S from './Todo.styled';
 const Todo = (pr) => {
   const ref = useRef(null);
 
+  const DeleteBt = async (id) => {
+    try {
+      const res = await fetch(`http://localhost:3000/todo/${id}`, {
+        method: 'DELETE',
+      });
+      res.json().then((res) => console.log('삭제완료', res));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const EditValue = async (id, content, edit) => {
     try {
       const res = await fetch(`http://localhost:3000/todo/${id}`, {
@@ -39,12 +50,7 @@ const Todo = (pr) => {
               Edit
             </S.EditBt>
           )}
-          <S.DeleteBt
-            className='Bt'
-            onClick={() => {
-              pr.setTodoList((prev) => prev.filter((el) => el.id !== pr.todo.id));
-            }}
-          >
+          <S.DeleteBt className='Bt' onClick={() => DeleteBt(pr.todo.id)}>
             X
           </S.DeleteBt>
         </S.BtBox>
