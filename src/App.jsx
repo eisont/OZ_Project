@@ -45,7 +45,7 @@ const App = () => {
         const json = await res.json();
         setFamousSaying({ author: json.author, message: json.message });
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     };
     fetchData();
