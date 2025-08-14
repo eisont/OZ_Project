@@ -14,13 +14,12 @@ import { useEffect, useState } from 'react';
 // useEffect, ==> 완료
 // useRef ==> 완료
 // >>>>> 다 했다면? <<<<<
-// json-server를 사용해 Todo 정보를 파일로 저장해 보세요.
+// json-server를 사용해 Todo 정보를 파일로 저장해 보세요. === 완료
 // Custom Hook을 만들고 사용해 보세요.
 
 const App = () => {
   const [famousSaying, setFamousSaying] = useState({ author: '', message: '' });
   const [todoList, setTodoList] = useState([]);
-  const [, setError] = useState('');
   const [time, setTime] = useState('');
   const [intervalid, setIntervalid] = useState(null);
 
@@ -32,7 +31,7 @@ const App = () => {
         const json = await res.json();
         setTodoList(json);
       } catch (err) {
-        setError(err);
+        console.error(err);
       }
     };
     fetchData();
