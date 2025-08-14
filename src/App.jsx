@@ -20,21 +20,36 @@ import { useEffect, useState } from 'react';
 const App = () => {
   const [famousSaying, setFamousSaying] = useState({ author: '', message: '' });
   const [todoList, setTodoList] = useState([]);
+  const [, setError] = useState('');
   const [time, setTime] = useState('');
   const [intervalid, setIntervalid] = useState(null);
 
   // 데이터 받아오기
   useEffect(() => {
-    fetch('http://localhost:3000/todo')
-      .then((res) => res.json())
-      .then((res) => setTodoList(res));
+    const fetchData = async () => {
+      try {
+        const res = await fetch('http://localhost:3000/todo');
+        const json = await res.json();
+        setTodoList(json);
+      } catch (err) {
+        setError(err);
+      }
+    };
+    fetchData();
   }, [todoList]);
 
   // 랜덤 명언 받아오기!
   useEffect(() => {
-    fetch('https://korean-advice-open-api.vercel.app/api/advice')
-      .then((res) => res.json())
-      .then((res) => setFamousSaying({ author: res.author, message: res.message }));
+    const fetchData = async () => {
+      try {
+        const res = await fetch('https://korean-advice-open-api.vercel.app/api/advice');
+        const json = await res.json();
+        setFamousSaying({ author: json.author, message: json.message });
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
   }, []);
 
   const currentTime = () => {
