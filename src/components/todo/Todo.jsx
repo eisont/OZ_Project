@@ -1,18 +1,10 @@
 import { useRef } from 'react';
 import EditTodo from './edittodo/Edittodo';
 import * as S from './Todo.styled';
+import { modifyData } from '../../useApi';
 
 const Todo = (pr) => {
   const ref = useRef(null);
-
-  const DoneValue = () => {
-    pr.setTodoList((prev) => prev.map((el) => (el.id === pr.todo.id && ref.current.value ? { ...el, content: ref.current.value, edit: !el.edit } : el)));
-  };
-  const EditValue = () => {
-    return pr.setTodoList((prev) => prev.map((el) => (el.id === pr.todo.id ? { ...el, edit: !el.edit } : el)));
-  };
-
-  // pr.todo.edit => 수정하기 , 수정완료 토글기능
 
   return (
     <S.Wrapper>
@@ -20,20 +12,15 @@ const Todo = (pr) => {
         {pr.todo.edit ? <EditTodo ref={ref} /> : <S.Content>{pr.todo.content}</S.Content>}
         <S.BtBox>
           {pr.todo.edit ? (
-            <S.EditBt className='Bt' onClick={DoneValue}>
+            <S.EditBt className='Bt' onClick={() => modifyData(`PATCH`, pr.todo.id, pr.setTodoList, ref.current.value, !pr.todo.edit)}>
               Done
             </S.EditBt>
           ) : (
-            <S.EditBt className='Bt' onClick={EditValue}>
+            <S.EditBt className='Bt' onClick={() => modifyData(`PATCH`, pr.todo.id, pr.setTodoList, pr.todo.content, !pr.todo.edit)}>
               Edit
             </S.EditBt>
           )}
-          <S.DeleteBt
-            className='Bt'
-            onClick={() => {
-              pr.setTodoList((prev) => prev.filter((el) => el.id !== pr.todo.id));
-            }}
-          >
+          <S.DeleteBt className='Bt' onClick={() => modifyData(`DELETE`, pr.todo.id, pr.setTodoList)}>
             X
           </S.DeleteBt>
         </S.BtBox>
