@@ -1,7 +1,7 @@
 import './App.css';
 import TodoInput from './components/todoInput/TodoInput';
 import TodoList from './components/todolist/TodoList';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // 프로젝트 최소 요구 사항
 // 1. Todo 생성 => 완료
@@ -14,15 +14,13 @@ import { useEffect, useState } from 'react';
 // useEffect, ==> 완료
 // useRef ==> 완료
 // >>>>> 다 했다면? <<<<<
-// json-server를 사용해 Todo 정보를 파일로 저장해 보세요.
+// json-server를 사용해 Todo 정보를 파일로 저장해 보세요. === 완료
 // Custom Hook을 만들고 사용해 보세요.
 
 const App = () => {
   const [famousSaying, setFamousSaying] = useState({ author: '', message: '' });
   const [todoList, setTodoList] = useState([]);
-  const [, setError] = useState('');
   const [time, setTime] = useState('');
-  const [intervalid, setIntervalid] = useState(null);
 
   // 데이터 받아오기
   useEffect(() => {
@@ -32,7 +30,7 @@ const App = () => {
         const json = await res.json();
         setTodoList(json);
       } catch (err) {
-        setError(err);
+        console.error(err);
       }
     };
     fetchData();
@@ -46,7 +44,7 @@ const App = () => {
         const json = await res.json();
         setFamousSaying({ author: json.author, message: json.message });
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     };
     fetchData();
@@ -60,35 +58,34 @@ const App = () => {
     const hour = today.getHours();
     const minuite = today.getMinutes();
     const second = today.getSeconds();
-    return setTime(`${year} ${month}/${day} ${hour}:${minuite}:${second}`);
+    setTime(`${year} ${month}/${day} ${hour}:${minuite}:${second}`);
   };
 
+  const intervalRef = useRef();
   useEffect(() => {
-    const id = setInterval(() => {
-      currentTime();
-    }, 1000);
+    currentTime();
 
-    setIntervalid(id);
+    intervalRef.current = setInterval(currentTime, 1000);
 
-    return () => clearInterval(id);
+    return () => clearInterval(intervalRef.current);
   }, []);
 
   const startBt = () => {
-    if (!intervalid) {
-      const id = setInterval(() => currentTime(), 1000);
-      setIntervalid(id);
+    if (!intervalRef.current) {
+      intervalRef.current = setInterval(currentTime, 1000);
     }
   };
   const stopBt = () => {
-    if (intervalid) {
-      clearInterval(intervalid);
-      setIntervalid(null);
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
     }
   };
+
   return (
     <div className='wrapper'>
-      <button onClick={stopBt}>time stop</button>
-      <button onClick={startBt}>time start</button>
+      <button onClick={startBt}>start</button>
+      <button onClick={stopBt}>stop</button>
       <h1>{time}</h1>
       <h3>
         {famousSaying.message} <div style={{ fontSize: '16px' }}>- {famousSaying.author}</div>
