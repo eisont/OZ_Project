@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import * as S from './TodoInput.styled';
 
-const TodoInput = () => {
+const TodoInput = (pr) => {
   const [inputValue, setInputValue] = useState('');
 
   // 데이터 등록하기
@@ -18,6 +18,10 @@ const TodoInput = () => {
       });
       const json = await res.json();
       console.log('등록 완료', json);
+
+      const res2 = await fetch('http://localhost:3000/todo');
+      const json2 = await res2.json();
+      pr.setTodoList(json2);
     } catch (err) {
       console.log(err);
     }
