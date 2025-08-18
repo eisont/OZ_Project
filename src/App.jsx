@@ -36,7 +36,7 @@ const App = () => {
       }
     };
     fetchData();
-  }, [todoList]);
+  }, []);
 
   // 랜덤 명언 받아오기!
   useEffect(() => {
@@ -93,7 +93,7 @@ const App = () => {
       <h3>
         {famousSaying.message} <div style={{ fontSize: '16px' }}>- {famousSaying.author}</div>
       </h3>
-      <TodoInput todoList={todoList} setTodoList={setTodoList} />
+      <TodoInput setTodoList={setTodoList} />
       <TodoList todoList={todoList} setTodoList={setTodoList} />
     </div>
   );
