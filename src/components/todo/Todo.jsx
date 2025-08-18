@@ -11,6 +11,10 @@ const Todo = (pr) => {
         method: 'DELETE',
       });
       res.json().then((res) => console.log('삭제완료', res));
+
+      const res2 = await fetch('http://localhost:3000/todo');
+      const json2 = await res2.json();
+      pr.setTodoList(json2);
     } catch (err) {
       console.error(err);
     }
@@ -27,11 +31,12 @@ const Todo = (pr) => {
       });
       const data = await res.json();
       console.log('수정완료', data);
+      fetch(`http://localhost:3000/todo`)
+        .then((res) => res.json())
+        .then((res) => pr.setTodoList(res));
     } catch (err) {
       console.error(err);
     }
-
-    return pr.setTodoList((prev) => prev.map((el) => (el.id === pr.todo.id ? { ...el, edit: !el.edit } : el)));
   };
 
   // pr.todo.edit => 수정하기 , 수정완료 토글기능
