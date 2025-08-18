@@ -7,13 +7,13 @@ const Todo = (pr) => {
 
   const DeleteBt = async (id) => {
     try {
-      const res = await fetch(`http://localhost:3000/todo/${id}`, {
+      const deleteRes = await fetch(`http://localhost:3000/todo/${id}`, {
         method: 'DELETE',
       });
-      res.json().then((res) => console.log('삭제완료', res));
+      await deleteRes.json();
 
-      const res2 = await fetch('http://localhost:3000/todo');
-      const json2 = await res2.json();
+      const getRes = await fetch('http://localhost:3000/todo');
+      const json2 = await getRes.json();
       pr.setTodoList(json2);
     } catch (err) {
       console.error(err);
@@ -29,8 +29,7 @@ const Todo = (pr) => {
         },
         body: JSON.stringify({ content, edit }),
       });
-      const data = await res.json();
-      console.log('수정완료', data);
+      await res.json();
       fetch(`http://localhost:3000/todo`)
         .then((res) => res.json())
         .then((res) => pr.setTodoList(res));
@@ -38,8 +37,6 @@ const Todo = (pr) => {
       console.error(err);
     }
   };
-
-  // pr.todo.edit => 수정하기 , 수정완료 토글기능
 
   return (
     <S.Wrapper>

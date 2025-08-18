@@ -4,7 +4,6 @@ import * as S from './TodoInput.styled';
 const TodoInput = (pr) => {
   const [inputValue, setInputValue] = useState('');
 
-  // 데이터 등록하기
   const addData = async (content) => {
     try {
       const res = await fetch('http://localhost:3000/todo', {
@@ -16,14 +15,13 @@ const TodoInput = (pr) => {
           edit: false,
         }),
       });
-      const json = await res.json();
-      console.log('등록 완료', json);
+      await res.json();
 
       const res2 = await fetch('http://localhost:3000/todo');
       const json2 = await res2.json();
       pr.setTodoList(json2);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
