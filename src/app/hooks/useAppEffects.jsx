@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
-import App from './App';
+import App from '../../App';
 
-const EffectWrapper = () => {
+const EffectsWrapper = () => {
   const [todoList, setTodoList] = useState([]);
   const [famousSaying, setFamousSaying] = useState({ author: '', message: '' });
   const [time, setTime] = useState('');
@@ -58,4 +58,4 @@ const EffectWrapper = () => {
   return <App famousSaying={famousSaying} time={time} intervalRef={intervalRef} currentTime={currentTime} todoList={todoList} setTodoList={setTodoList} />;
 };
 
-export default EffectWrapper;
+export default EffectsWrapper;
