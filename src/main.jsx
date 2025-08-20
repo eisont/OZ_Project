@@ -1,10 +1,10 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
-import EffectWrapper from './EffectWrapper';
+import EffectsWrapper from './app/hooks/useAppEffects';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <EffectWrapper />
+    <EffectsWrapper />
   </StrictMode>
 );

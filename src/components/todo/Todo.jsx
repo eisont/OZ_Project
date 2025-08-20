@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import EditTodo from './edittodo/Edittodo';
 import * as S from './Todo.styled';
-import { modifyData } from '../../useApi';
+import { modifyData } from '../../shared/hooks/useApi';
 
 const Todo = (pr) => {
   const ref = useRef(null);
