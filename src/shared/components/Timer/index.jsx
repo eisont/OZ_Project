@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { formatTime } from '../../shared/utils/formatTime';
+import { formatTime } from '../../utils/formatTime';
 
 // timer
 const Timer = () => {

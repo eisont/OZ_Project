@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import './App.css';
-import TodoInput from './components/todoInput/TodoInput';
-import TodoList from './components/todolist/TodoList';
+import TodoInput from '../shared/components/todoInput/TodoInput';
+import TodoList from '../shared/components/todolist/TodoList';
+import './../App.css';
 
 const App = (pr) => {
   const [toggle, setToggle] = useState(true);

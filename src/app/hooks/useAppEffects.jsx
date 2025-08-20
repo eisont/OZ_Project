@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import App from '../../App';
+import App from '../App';
 
 const EffectsWrapper = () => {
   const [todoList, setTodoList] = useState([]);
