@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import * as S from './TodoInput.styled';
 import { addData } from '../../hooks/useApi';
+import * as S from './TodoInput.styled';
 
 const TodoInput = (pr) => {
   const [inputValue, setInputValue] = useState('');

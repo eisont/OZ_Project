@@ -1,10 +1,13 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import EffectsWrapper from './hooks/useAppEffects';
 import './../index.css';
+import Layout from './layout';
+import { BrowserRouter } from 'react-router-dom';
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <EffectsWrapper />
-  </StrictMode>
+  <BrowserRouter>
+    <StrictMode>
+      <Layout />
+    </StrictMode>
+  </BrowserRouter>
 );
