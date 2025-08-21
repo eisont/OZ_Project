@@ -12,9 +12,9 @@ const Header = () => {
       <S.Menu>
         <S.Linkst to='/Timer_StopWatch_CurrentTime'>Timer_StopWatch_CurrentTime</S.Linkst>
       </S.Menu>
-      <S.Menu>
+      {/* <S.Menu>
         <S.Linkst to='/Weather_Project'>Weather_Project</S.Linkst>
-      </S.Menu>
+      </S.Menu> */}
       <S.Menu>
         <S.Linkst to='/TailwindCss_Project'>TailwindCss_Project</S.Linkst>
       </S.Menu>
