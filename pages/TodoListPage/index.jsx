@@ -3,7 +3,16 @@ import TodoInput from '../../src/shared/components/todoInput';
 import TodoList from '../../src/shared/components/todolist';
 import styled from '@emotion/styled';
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const FamousSaying = styled.div`
+  font-size: 30px;
+  font-weight: 600;
+  text-align: center;
+`;
 
 const TodoListPage = () => {
   const [todoList, setTodoList] = useState([]);
@@ -38,9 +47,9 @@ const TodoListPage = () => {
 
   return (
     <Wrapper>
-      <h3>
+      <FamousSaying>
         {famousSaying.message} <div style={{ fontSize: '16px' }}>- {famousSaying.author}</div>
-      </h3>
+      </FamousSaying>
       <TodoInput setTodoList={setTodoList} />
       <TodoList todoList={todoList} setTodoList={setTodoList} />
     </Wrapper>

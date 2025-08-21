@@ -1,13 +1,12 @@
-import Todo from '../todo/Todo';
-import * as S from './TodoList.styled';
+import Todo from '../Todo';
 
 const TodoList = (pr) => {
   return (
-    <S.Wrapper>
+    <div>
       {pr.todoList.map((el) => (
         <Todo key={el.id} todo={el} setTodoList={pr.setTodoList} />
       ))}
-    </S.Wrapper>
+    </div>
   );
 };
 

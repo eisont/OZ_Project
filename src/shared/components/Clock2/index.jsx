@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Bt } from '../../ui/button.styled';
+import { Bt } from '../../ui/Common.styled';
 
 const Clock2 = () => {
   const [toggle, setToggle] = useState(true);
