@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { CommonWrapper } from '../../shared/ui/button.styled';
+import { CommonWrapper } from '../../shared/ui/Common.styled';
 import Header from './header';
 import TodoListPage from '../../../pages/TodoListPage';
 import App from '../App';

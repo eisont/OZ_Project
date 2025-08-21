@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
-import { Bt } from '../../../shared/ui/button.styled';
+import { Bt } from '../../../shared/ui/Common.styled';
 
 export const Wrapper = styled.div`
   width: 100%;
