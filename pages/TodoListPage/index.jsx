@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import TodoInput from '../../src/shared/components/todoInput';
 import TodoList from '../../src/shared/components/todolist';
+import styled from '@emotion/styled';
+
+const Wrapper = styled.div``;
 
 const TodoListPage = () => {
   const [todoList, setTodoList] = useState([]);
@@ -34,13 +37,13 @@ const TodoListPage = () => {
   }, []);
 
   return (
-    <div className='wrapper'>
+    <Wrapper>
       <h3>
         {famousSaying.message} <div style={{ fontSize: '16px' }}>- {famousSaying.author}</div>
       </h3>
       <TodoInput setTodoList={setTodoList} />
       <TodoList todoList={todoList} setTodoList={setTodoList} />
-    </div>
+    </Wrapper>
   );
 };
 

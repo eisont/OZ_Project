@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { Bt } from '../../ui/button.styled';
 
 const Clock2 = () => {
   const [toggle, setToggle] = useState(true);
@@ -43,12 +44,12 @@ const Clock2 = () => {
     <>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         {toggle ? <h2 style={{ color: 'green' }}>{time}</h2> : <h2 style={{ color: 'red' }}>{time}</h2>}
-        <button style={{ background: 'green', color: 'white' }} className='Bt' onClick={startBt}>
+        <Bt style={{ background: 'green', color: 'white' }} onClick={startBt}>
           start
-        </button>
-        <button style={{ background: 'red', color: 'white' }} className='Bt' onClick={stopBt}>
+        </Bt>
+        <Bt style={{ background: 'red', color: 'white' }} onClick={stopBt}>
           stop
-        </button>
+        </Bt>
       </div>
     </>
   );
