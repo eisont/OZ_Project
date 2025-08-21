@@ -10,7 +10,7 @@ const Clock = () => {
     }, 1000);
   }, []);
 
-  return <>{clocktime.toLocaleTimeString()}</>;
+  return <div style={{ padding: '10px', fontSize: '20px' }}>{clocktime.toLocaleTimeString()}</div>;
 };
 
 export default Clock;

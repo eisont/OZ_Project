@@ -1,5 +1,24 @@
 import { useEffect, useRef, useState } from 'react';
 import { Bt } from '../../ui/Common.styled';
+import styled from '@emotion/styled';
+
+const Wrapper = styled.div`
+  padding: 10px;
+
+  border: ${(pr) => (pr.toggle ? '3px solid green' : '5px solid red')};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const BtBox = styled.div`
+  width: 110px;
+  display: flex;
+  justify-content: space-between;
+`;
+const TextBox = styled.div`
+  font-size: 30px;
+  font-weight: 600;
+`;
 
 const Clock2 = () => {
   const [toggle, setToggle] = useState(true);
@@ -41,17 +60,17 @@ const Clock2 = () => {
   };
 
   return (
-    <>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        {toggle ? <h2 style={{ color: 'green' }}>{time}</h2> : <h2 style={{ color: 'red' }}>{time}</h2>}
+    <Wrapper toggle={toggle}>
+      {toggle ? <TextBox style={{ color: 'green' }}>{time}</TextBox> : <TextBox style={{ color: 'red' }}>{time}</TextBox>}
+      <BtBox>
         <Bt style={{ background: 'green', color: 'white' }} onClick={startBt}>
           start
         </Bt>
         <Bt style={{ background: 'red', color: 'white' }} onClick={stopBt}>
           stop
         </Bt>
-      </div>
-    </>
+      </BtBox>
+    </Wrapper>
   );
 };
 

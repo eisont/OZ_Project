@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { formatTime } from '../../utils/formatTime';
+import * as S from './Timer.styled';
 
 // timer
 const Timer = () => {
@@ -21,10 +22,13 @@ const Timer = () => {
   }, [isOn, time]);
 
   return (
-    <div>
-      <div>
+    <S.Wrapper isOn={isOn}>
+      <S.Time startTime={startTime} isOn={isOn}>
         {time ? formatTime(time) : formatTime(startTime)}
-        <button
+      </S.Time>
+      <S.BtBox>
+        <S.Bt
+          style={{ background: 'green' }}
           onClick={() => {
             setIsOn(true);
             setTime(time ? time : startTime);
@@ -32,19 +36,22 @@ const Timer = () => {
           }}
         >
           시작
-        </button>
-        <button onClick={() => setIsOn(false)}>멈춤</button>
-        <button
+        </S.Bt>
+        <S.Bt style={{ background: 'red' }} onClick={() => setIsOn(false)}>
+          멈춤
+        </S.Bt>
+        <S.Bt
+          style={{ background: 'yellow' }}
           onClick={() => {
             setTime(0);
             setIsOn(false);
           }}
         >
           리셋
-        </button>
-      </div>
+        </S.Bt>
+      </S.BtBox>
       <input type='range' max='3600' min='0' step='30' value={startTime} onChange={(e) => setStartTime(e.target.value)} />
-    </div>
+    </S.Wrapper>
   );
 };
 
