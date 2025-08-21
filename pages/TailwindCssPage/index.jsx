@@ -45,7 +45,7 @@ const TailwindCssPage = () => {
 
       <div className='p-20 font-bold text-9xl'>{check(count)}</div>
 
-      <p
+      <div
         className={twMerge(
           'text-stone-800',
           count >= 5 && 'text-green-500',
@@ -57,7 +57,7 @@ const TailwindCssPage = () => {
         )}
       >
         <div className='p-20 font-bold text-9xl'>{count}</div>
-      </p>
+      </div>
     </div>
   );
 };
